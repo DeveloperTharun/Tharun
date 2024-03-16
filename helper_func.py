@@ -7,6 +7,8 @@ import random
 import string
 from pyrogram import filters
 from pyrogram.enums import ChatMemberStatus
+from typing import Any, Optional
+from pyrogram.types import Message
 from config import FORCE_SUB_CHANNEL, ADMINS
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 from database.database import db
@@ -115,6 +117,27 @@ def get_readable_time(seconds: int) -> str:
 
 
 subscribed = filters.create(is_subscribed)
+
+def get_media_from_message(message: "Message") -> Any:
+    media_types = (
+        "audio",
+        "document",
+        "photo",
+        "sticker",
+        "animation",
+        "video",
+        "voice",
+        "video_note",
+    )
+    for attr in media_types:
+        media = getattr(message, attr, None)
+        if media:
+            return media
+
+def get_media_file_size(m):
+    media = get_media_from_message(m)
+    return getattr(media, "file_size", 0)
+    
 
 async def short_link(link):
     current_time = datetime.now() + timedelta(hours=5, minutes=30) 
