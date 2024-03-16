@@ -3,6 +3,7 @@
 
 
 import os
+import re
 import asyncio
 from pyrogram import Client, filters, __version__
 from pyrogram.enums import ParseMode
@@ -38,24 +39,24 @@ async def start_command(client: Client, message: Message):
             return
     
     if len(text) > 7:
-        # If the text starts with "verify-"
-        if text.startswith("verify-"):
-            parts = text.split("-", 2)
-            if len(parts) == 3:
-                verify_userid, token = parts[1:]
-                if str(id) == verify_userid:
-                    is_valid = await check_token(id, token)
-                    if is_valid:
-                        await message.reply_text(
-                            text=f"<b>You are successfully verified!\n\nNow You Can Have Access To Bot Until Next 12 Hrs. You Can Get Movie Files Without Verification For 12 Hours ❤️‍🩹</b>",
-                            protect_content=True
-                        )
-                        await verify_user(id, token)
-                    else:
-                        return await message.reply_text(
-                            text="<b>Expired or invalid verification link!</b>",
-                            protect_content=True
-                        )
+        match = re.match(r"verify-(\d+)-([A-Za-z0-9]+)", text)
+        if match:
+            verify_userid, token = match.groups()
+            if str(id) == verify_userid:
+                is_valid = await check_token(id, token)
+                if is_valid:
+                    # If token is valid, mark user as verified
+                    await verify_user(id, token)
+                    await message.reply_text(
+                        text=f"<b>You are successfully verified!\n\nNow You Can Have Access To Bot Until Next 12 Hrs. You Can Get Movie Files Without Verification For 12 Hours ❤️‍🩹</b>",
+                        protect_content=True
+                    )
+                    return  # Stop further execution
+                else:
+                    return await message.reply_text(
+                        text="<b>Expired or invalid verification link!</b>",
+                        protect_content=True
+                    )
         
         else:
             try:
