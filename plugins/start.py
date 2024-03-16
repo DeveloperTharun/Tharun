@@ -14,6 +14,10 @@ from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL
 from helper_func import subscribed, encode, decode, get_messages, check_token, get_token, verify_user, check_verification
 from database.database import db
 
+async def delete_file(message: Message):
+    await asyncio.sleep(300)
+    await message.delete()
+
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
 async def start_command(client: Client, message: Message):
     id = message.from_user.id
@@ -109,11 +113,17 @@ async def start_command(client: Client, message: Message):
                 reply_markup = None
 
             try:
-                await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT())
+                ss = await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT())
+                tt = await ss.reply_text(f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie File will be deleted in <b><u>5 minutes</u>\n\n<b><i>Please forward this File!!</b>",disable_web_page_preview=True, quote=True)
+                await asyncio.create_task(delete_file(ss))
+                await asyncio.create_task(delete_file(tt))
                 await asyncio.sleep(0.5)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
-                await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT())
+                ss = await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT())
+                tt = await ss.reply_text(f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie File will be deleted in <b><u>5 minutes</u>\n\n<b><i>Please forward this File!!</b>",disable_web_page_preview=True, quote=True)
+                await asyncio.create_task(delete_file(ss))
+                await asyncio.create_task(delete_file(tt))
             except:
                 pass
         return
