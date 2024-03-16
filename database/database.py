@@ -47,6 +47,10 @@ class Database:
         newvalues = {tag: value}
         await self.col.update_one(myquery, newvalues, upsert=True)
 
+    async def get_userdata(self, user_id):
+        user_data = await self.col.find_one({"id": user_id})
+        return user_data
+        
 db = Database(DB_URI, DB_NAME)
 
 
