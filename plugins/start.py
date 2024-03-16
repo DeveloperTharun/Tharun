@@ -20,11 +20,11 @@ async def start_command(client: Client, message: Message):
     await db.add_user(client, message)  
     text = message.text
     is_admin = id in ADMINS
-    command_params = message.command[1:]
+    command_params = " ".join(message.command[1:])
 
     if command_params:
         if command_params.startswith("verify"):
-            parts = start_param.split("-", 2)
+            parts = command_params.split("-", 2)
             if len(parts) == 3:
                 verify_userid, token = parts[1:]
                 if str(id) == verify_userid:
