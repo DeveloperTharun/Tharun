@@ -31,7 +31,7 @@ async def start_command(client: Client, message: Message):
                 InlineKeyboardButton("🔻 How to open and Verify 🔺", url="https://t.me/+38qZ1467fxBiNjE1")
             ]]
             await message.reply_text(
-                text="<b>Helllo {first}, You Need To Verify The Link To Get Movie Files, Verification will be expired after 12 hours.\n\nif you Don't know how to verify. Click below button to see your to verify the link.</b>",
+                text="<b>Helllo 👋🏻, You Need To Verify The Link To Get Movie Files, Verification will be expired after 12 hours.\n\nif you Don't know how to verify. Click below button to see your to verify the link.</b>",
                 protect_content=True,
                 reply_markup=InlineKeyboardMarkup(btn)
             )
