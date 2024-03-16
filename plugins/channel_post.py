@@ -7,7 +7,7 @@ from pyrogram.errors import FloodWait
 
 from bot import Bot
 from config import ADMINS, CHANNEL_ID, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
-from helper_func import encode
+from helper_func import encode, get_media_file_size
 
 def human_readable_size(size):
     if size < 1024:
