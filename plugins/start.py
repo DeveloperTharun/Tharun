@@ -22,40 +22,39 @@ async def start_command(client: Client, message: Message):
     is_admin = id in ADMINS
     
     if len(text) > 7:
-        match = re.match(r"verify-(\d+)-([A-Za-z0-9]+)", text)
-        if match:
-            verify_userid, token = match.groups()
-            if str(id) == verify_userid:
-                is_valid = await check_token(id, token)
-                if is_valid:
-                    # If token is valid, mark user as verified
-                    await verify_user(id, token)
-                    await message.reply_text(
-                        text=f"<b>You are successfully verified!\n\nNow You Can Have Access To Bot Until Next 12 Hrs. You Can Get Movie Files Without Verification For 12 Hours ❤️‍🩹</b>",
-                        protect_content=True
-                    )
-                    return  # Stop further execution
-                else:
-                    return await message.reply_text(
-                        text="<b>Expired or invalid verification link!</b>",
-                        protect_content=True
-                    )
-    elif not is_admin: 
-        text = message.text
-        is_verified = await check_verification(id)
+        if text.startswith("verify"):
+            parts = start_param.split("-", 2)
+            if len(parts) == 3:
+                verify_userid, token = parts[1:]
+                if str(userid) == verify_userid:
+                    is_valid = await check_token(userid, token)
+                    if is_valid:
+                        await message.reply_text(
+                            text=f"<b>You are successfully verified!\n\nNow you can have access to bot until next 12 hrs</b>",
+                            protect_content=True
+                        )
+                        await verify_user(userid, token)
+                    else:
+                        return await message.reply_text(
+                            text="<b>Expired or invalid verification link!</b>",
+                            protect_content=True
+                        )
+        elif not is_admin: 
+            text = message.text
+            is_verified = await check_verification(id)
         
-        if not is_verified:
-            btn = [[
-                InlineKeyboardButton("👨‍💻 Verify", url=await get_token(id, f"https://filestore.rapidbots.workers.dev?start="))
-                ],[
-                InlineKeyboardButton("🔻 How to open and Verify 🔺", url="https://t.me/+38qZ1467fxBiNjE1")
-            ]]
-            await message.reply_text(
-                text="<b>Helllo 👋🏻, You Need To Verify The Link To Get Movie Files, Verification Will Be Expired After 12 Hours.\n\nif You Don't Know how To Verify. Click Below Button To See Your To Verify The Link.</b>",
-                protect_content=True,
-                reply_markup=InlineKeyboardMarkup(btn)
-            )
-            return
+            if not is_verified:
+                btn = [[
+                    InlineKeyboardButton("👨‍💻 Verify", url=await get_token(id, f"https://filestore.rapidbots.workers.dev?start="))
+                    ],[
+                    InlineKeyboardButton("🔻 How to open and Verify 🔺", url="https://t.me/+38qZ1467fxBiNjE1")
+                ]]
+                await message.reply_text(
+                    text="<b>Helllo 👋🏻, You Need To Verify The Link To Get Movie Files, Verification Will Be Expired After 12 Hours.\n\nif You Don't Know how To Verify. Click Below Button To See Your To Verify The Link.</b>",
+                    protect_content=True,
+                    reply_markup=InlineKeyboardMarkup(btn)
+                )
+                return
         
         else:
             try:
