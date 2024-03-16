@@ -42,6 +42,10 @@ class Database:
     async def delete_user(self, user_id):
         await self.col.delete_many({'_id': int(user_id)})
 
+    async def update_user_info(self, user_id, value: dict, tag="$set"):
+        myquery = {"id": user_id}
+        newvalues = {tag: value}
+        await self.col.update_one(myquery, newvalues, upsert=True)
 
 db = Database(DB_URI, DB_NAME)
 
