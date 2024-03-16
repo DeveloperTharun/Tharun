@@ -4,7 +4,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from bot import Bot
 from config import ADMINS
-from helper_func import encode, get_message_id
+from helper_func import encode, get_message_id, get_media_file_size
 
 def human_readable_size(size):
     if size < 1024:
@@ -67,15 +67,7 @@ async def link_generator(client: Client, message: Message):
             await channel_message.reply("❌ Error\n\nthis Forwarded Post is not from my DB Channel or this Link is not taken from DB Channel", quote=True)
             continue
 
-    forward_message = channel_message.forward_from_message_id or channel_message
-    file_size = None
-
-    if forward_message.document:
-        file_size = forward_message.document.file_size
-    elif forward_message.audio:
-        file_size = forward_message.audio.file_size
-    elif forward_message.video:
-        file_size = forward_message.video.file_size
+    filesize = human_readable_size(get_media_file_size())
 
     base64_string = await encode(f"get-{msg_id * abs(client.db_channel.id)}")
     link = f"https://filestore.rapidbots.workers.dev?start={base64_string}"
