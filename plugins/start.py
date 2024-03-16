@@ -31,7 +31,7 @@ async def start_command(client: Client, message: Message):
                 InlineKeyboardButton("🔻 How to open and Verify 🔺", url="https://t.me/+38qZ1467fxBiNjE1")
             ]]
             await message.reply_text(
-                text="<b>Helllo 👋🏻, You Need To Verify The Link To Get Movie Files, Verification will be expired after 12 hours.\n\nif you Don't know how to verify. Click below button to see your to verify the link.</b>",
+                text="<b>Helllo 👋🏻, You Need To Verify The Link To Get Movie Files, Verification Will Be Expired After 12 Hours.\n\nif You Don't Know how To Verify. Click Below Button To See Your To Verify The Link.</b>",
                 protect_content=True,
                 reply_markup=InlineKeyboardMarkup(btn)
             )
@@ -47,7 +47,7 @@ async def start_command(client: Client, message: Message):
                     is_valid = await check_token(id, token)
                     if is_valid:
                         await message.reply_text(
-                            text=f"<b>You are successfully verified!\n\nNow you can have access to bot until next 12 hrs. You Can Get Movie Files Without Verification For 12 Hours ❤️‍🩹</b>",
+                            text=f"<b>You are successfully verified!\n\nNow You Can Have Access To Bot Until Next 12 Hrs. You Can Get Movie Files Without Verification For 12 Hours ❤️‍🩹</b>",
                             protect_content=True
                         )
                         await verify_user(id, token)
