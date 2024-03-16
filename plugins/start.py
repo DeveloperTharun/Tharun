@@ -26,14 +26,14 @@ async def start_command(client: Client, message: Message):
             parts = start_param.split("-", 2)
             if len(parts) == 3:
                 verify_userid, token = parts[1:]
-                if str(userid) == verify_userid:
-                    is_valid = await check_token(userid, token)
+                if str(id) == verify_userid:
+                    is_valid = await check_token(id, token)
                     if is_valid:
                         await message.reply_text(
                             text=f"<b>You are successfully verified!\n\nNow you can have access to bot until next 12 hrs</b>",
                             protect_content=True
                         )
-                        await verify_user(userid, token)
+                        await verify_user(id, token)
                     else:
                         return await message.reply_text(
                             text="<b>Expired or invalid verification link!</b>",
