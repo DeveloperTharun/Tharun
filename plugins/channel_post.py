@@ -55,7 +55,7 @@ async def channel_post(client: Client, message: Message):
         print(e)
         await reply_text.edit_text("Something went Wrong..!")
         return
-    filesize = human_readable_size(get_media_file_size(post_message.id))
+    filesize = human_readable_size(get_media_file_size(message))
     converted_id = post_message.id * abs(client.db_channel.id)
     string = f"get-{converted_id}"
     base64_string = await encode(string)
