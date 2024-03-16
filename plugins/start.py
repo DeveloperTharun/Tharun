@@ -21,23 +21,6 @@ async def start_command(client: Client, message: Message):
     text = message.text
     is_admin = id in ADMINS
     
-    if not is_admin: 
-        text = message.text
-        is_verified = await check_verification(id)
-        
-        if not is_verified:
-            btn = [[
-                InlineKeyboardButton("👨‍💻 Verify", url=await get_token(id, f"https://filestore.rapidbots.workers.dev?start="))
-                ],[
-                InlineKeyboardButton("🔻 How to open and Verify 🔺", url="https://t.me/+38qZ1467fxBiNjE1")
-            ]]
-            await message.reply_text(
-                text="<b>Helllo 👋🏻, You Need To Verify The Link To Get Movie Files, Verification Will Be Expired After 12 Hours.\n\nif You Don't Know how To Verify. Click Below Button To See Your To Verify The Link.</b>",
-                protect_content=True,
-                reply_markup=InlineKeyboardMarkup(btn)
-            )
-            return
-    
     if len(text) > 7:
         match = re.match(r"verify-(\d+)-([A-Za-z0-9]+)", text)
         if match:
@@ -57,6 +40,22 @@ async def start_command(client: Client, message: Message):
                         text="<b>Expired or invalid verification link!</b>",
                         protect_content=True
                     )
+    elif not is_admin: 
+        text = message.text
+        is_verified = await check_verification(id)
+        
+        if not is_verified:
+            btn = [[
+                InlineKeyboardButton("👨‍💻 Verify", url=await get_token(id, f"https://filestore.rapidbots.workers.dev?start="))
+                ],[
+                InlineKeyboardButton("🔻 How to open and Verify 🔺", url="https://t.me/+38qZ1467fxBiNjE1")
+            ]]
+            await message.reply_text(
+                text="<b>Helllo 👋🏻, You Need To Verify The Link To Get Movie Files, Verification Will Be Expired After 12 Hours.\n\nif You Don't Know how To Verify. Click Below Button To See Your To Verify The Link.</b>",
+                protect_content=True,
+                reply_markup=InlineKeyboardMarkup(btn)
+            )
+            return
         
         else:
             try:
