@@ -35,13 +35,13 @@ async def start_command(client: Client, message: Message):
                     is_valid = await check_token(id, token)
                     if is_valid:
                         await message.reply_text(
-                            text=f"<b>You are successfully verified!\n\nNow you can have access to bot until next 12 hrs</b>",
+                            text=f"<b>You Are Successfully Verified For 12hrs ❤️‍🩹\n\nYou Can Get Any Movie Files Without Verifiy Untill Next 12Hrs.</b>",
                             protect_content=True
                         )
                         await verify_user(id, token)
                     else:
                         return await message.reply_text(
-                            text="<b>Expired or invalid verification link!</b>",
+                            text="<b>Expired or invalid Verification Link 🫣</b>",
                             protect_content=True
                         )
     
@@ -114,14 +114,14 @@ async def start_command(client: Client, message: Message):
 
             try:
                 ss = await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT())
-                tt = await ss.reply_text(f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie File will be deleted in <b><u>5 minutes</u>\n\n<b><i>Please forward this File!!</b>",disable_web_page_preview=True, quote=True)
+                tt = await ss.reply_text(f"<b>𝙄𝙈𝙋𝙊𝙍𝙏𝘼𝙉𝙏  ↦↦↦⃟👉 This Movie File will be deleted in 5 minutes. So Please forward this File Before Download 📥</b>",disable_web_page_preview=True, quote=True)
                 await asyncio.create_task(delete_file(ss))
                 await asyncio.create_task(delete_file(tt))
                 await asyncio.sleep(0.5)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
                 ss = await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT())
-                tt = await ss.reply_text(f"<b><u>❗️❗️❗️IMPORTANT❗️️❗️❗️</u></b>\n\nThis Movie File will be deleted in <b><u>5 minutes</u>\n\n<b><i>Please forward this File!!</b>",disable_web_page_preview=True, quote=True)
+                tt = await ss.reply_text(f"<b>𝙄𝙈𝙋𝙊𝙍𝙏𝘼𝙉𝙏  ↦↦↦⃟👉 This Movie File will be deleted in 5 minutes. So Please forward this File Before Download 📥</b>",disable_web_page_preview=True, quote=True)
                 await asyncio.create_task(delete_file(ss))
                 await asyncio.create_task(delete_file(tt))
             except:
