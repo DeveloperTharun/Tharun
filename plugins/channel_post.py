@@ -9,6 +9,18 @@ from bot import Bot
 from config import ADMINS, CHANNEL_ID, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
 from helper_func import encode
 
+def human_readable_size(size):
+    if size < 1024:
+        return f"{size} Bytes"
+    size /= 1024.0
+    if size < 1024:
+        return f"{size:.2f} KB"
+    size /= 1024.0
+    if size < 1024:
+        return f"{size:.2f} MB"
+    size /= 1024.0
+    return f"{size:.2f} GB"
+
 @Bot.on_message(filters.private & filters.user(ADMINS) & filters.command("setforcesub"))
 async def setCommand(client: Bot, message: Message):
     try:
@@ -43,6 +55,7 @@ async def channel_post(client: Client, message: Message):
         print(e)
         await reply_text.edit_text("Something went Wrong..!")
         return
+    filesize = human_readable_size(get_media_file_size(post_message.id))
     converted_id = post_message.id * abs(client.db_channel.id)
     string = f"get-{converted_id}"
     base64_string = await encode(string)
@@ -50,7 +63,7 @@ async def channel_post(client: Client, message: Message):
 
     reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔁 Share URL", url=f'https://telegram.me/share/url?url={link}')]])
 
-    await reply_text.edit(f"<b>Here is your link</b>\n\n<code>{link}</code>", reply_markup=reply_markup, disable_web_page_preview = True)
+    await reply_text.edit(f"<b>Here is your link</b>\n\nFile Size: {filesize}\n\n<code>{link}</code>", reply_markup=reply_markup, disable_web_page_preview = True)
 
     if not DISABLE_CHANNEL_BUTTON:
         await post_message.edit_reply_markup(reply_markup)
