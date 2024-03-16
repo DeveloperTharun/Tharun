@@ -67,7 +67,7 @@ async def link_generator(client: Client, message: Message):
             await channel_message.reply("❌ Error\n\nthis Forwarded Post is not from my DB Channel or this Link is not taken from DB Channel", quote=True)
             continue
 
-    filesize = human_readable_size(get_media_file_size(channel_message))
+    filesize = human_readable_size(get_media_file_size(msg_id))
 
     base64_string = await encode(f"get-{msg_id * abs(client.db_channel.id)}")
     link = f"https://filestore.rapidbots.workers.dev?start={base64_string}"
