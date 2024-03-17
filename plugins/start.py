@@ -18,7 +18,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 async def delete_file(message: Message):
-    await asyncio.sleep(300)
+    await asyncio.sleep(5)
     await message.delete()
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
