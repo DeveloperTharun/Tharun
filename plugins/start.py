@@ -13,6 +13,9 @@ from bot import Bot
 from config import ADMINS, FORCE_MSG, START_MSG, CUSTOM_CAPTION, DISABLE_CHANNEL_BUTTON, PROTECT_CONTENT
 from helper_func import subscribed, encode, decode, get_messages, check_token, get_token, verify_user, check_verification
 from database.database import db
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 async def delete_file(message: Message):
     await asyncio.sleep(300)
@@ -25,6 +28,9 @@ async def start_command(client: Client, message: Message):
     text = message.text
     is_admin = id in ADMINS
     command_params = " ".join(message.command[1:])
+    
+    # Log command parameters
+    logging.info(f"Command Parameters: {command_params}")
 
     if command_params:
         if command_params.startswith("verify"):
@@ -65,15 +71,20 @@ async def start_command(client: Client, message: Message):
     if len(text)>7:
         try:
             base64_string = text.split(" ", 1)[1]
-        except:
+        except Exception as e:
+            # Log exceptions
+            logging.error(f"Exception occurred while splitting text: {e}")
             return
+        
         string = await decode(base64_string)
         argument = string.split("-")
         if len(argument) == 3:
             try:
                 start = int(int(argument[1]) / abs(client.db_channel.id))
                 end = int(int(argument[2]) / abs(client.db_channel.id))
-            except:
+            except Exception as e:
+                # Log exceptions
+                logging.error(f"Exception occurred while calculating start and end: {e}")
                 return
             if start <= end:
                 ids = range(start,end+1)
@@ -88,12 +99,16 @@ async def start_command(client: Client, message: Message):
         elif len(argument) == 2:
             try:
                 ids = [int(int(argument[1]) / abs(client.db_channel.id))]
-            except:
+            except Exception as e:
+                # Log exceptions
+                logging.error(f"Exception occurred while processing IDs: {e}")
                 return
         temp_msg = await message.reply("Please wait...")
         try:
             messages = await get_messages(client, ids)
-        except:
+        except Exception as e:
+            # Log exceptions
+            logging.error(f"Exception occurred while getting messages: {e}")
             await message.reply_text("Something went wrong..!")
             return
         await temp_msg.delete()
@@ -124,7 +139,9 @@ async def start_command(client: Client, message: Message):
                 tt = await ss.reply_text(f"<b>𝙄𝙈𝙋𝙊𝙍𝙏𝘼𝙉𝙏  ↦↦↦⃟👉 This Movie File will be deleted in 5 minutes. So Please forward this File Before Download 📥</b>",disable_web_page_preview=True, quote=True)
                 await asyncio.create_task(delete_file(ss))
                 await asyncio.create_task(delete_file(tt))
-            except:
+            except Exception as e:
+                # Log exceptions
+                logging.error(f"Exception occurred while processing messages: {e}")
                 pass
         return
     else:
@@ -149,7 +166,6 @@ async def start_command(client: Client, message: Message):
             quote = True
         )
         return
-
     
 #=====================================================================================##
 
