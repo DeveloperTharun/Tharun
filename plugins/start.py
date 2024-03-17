@@ -18,7 +18,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 async def delete_file(message: Message):
-    await asyncio.sleep(5)
+    await asyncio.sleep(300)
     await message.delete()
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
@@ -72,7 +72,6 @@ async def start_command(client: Client, message: Message):
         try:
             base64_string = text.split(" ", 1)[1]
         except Exception as e:
-            # Log exceptions
             logging.error(f"Exception occurred while splitting text: {e}")
             return
         
@@ -83,7 +82,6 @@ async def start_command(client: Client, message: Message):
                 start = int(int(argument[1]) / abs(client.db_channel.id))
                 end = int(int(argument[2]) / abs(client.db_channel.id))
             except Exception as e:
-                # Log exceptions
                 logging.error(f"Exception occurred while calculating start and end: {e}")
                 return
             if start <= end:
@@ -100,14 +98,12 @@ async def start_command(client: Client, message: Message):
             try:
                 ids = [int(int(argument[1]) / abs(client.db_channel.id))]
             except Exception as e:
-                # Log exceptions
                 logging.error(f"Exception occurred while processing IDs: {e}")
                 return
         temp_msg = await message.reply("Please wait...")
         try:
             messages = await get_messages(client, ids)
         except Exception as e:
-            # Log exceptions
             logging.error(f"Exception occurred while getting messages: {e}")
             await message.reply_text("Something went wrong..!")
             return
