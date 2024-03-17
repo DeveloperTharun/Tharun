@@ -40,15 +40,11 @@ async def start_command(client: Client, message: Message):
                 if str(id) == verify_userid:
                     is_valid = await check_token(id, token)
                     if is_valid:
-                        await message.reply_text(
-                            text=f"<b>You Are Successfully Verified For 12hrs ❤️‍🩹\n\nYou Can Get Any Movie Files Without Verifiy Untill Next 12Hrs.</b>",
-                            protect_content=True
-                        )
+                        await message.reply_text(text=f"<b>You Are Successfully Verified For 12hrs ❤️‍🩹\n\nYou Can Get Any Movie Files Without Verifiy Untill Next 12Hrs.</b>")
                         await verify_user(id, token)
                     else:
                         return await message.reply_text(
-                            text="<b>Expired or invalid Verification Link 🫣</b>",
-                            protect_content=True
+                            text="<b>Expired or invalid Verification Link 🫣</b>"
                         )
     
     if not is_admin: 
@@ -63,7 +59,6 @@ async def start_command(client: Client, message: Message):
             ]]
             await message.reply_text(
                 text="<b>Hello 👋🏻, You Need To Verify The Link To Get Movie Files, Verification Will Be Expired After 12 Hours.\n\nif You Don't Know how To Verify. Click Below Button To See Your To Verify The Link.</b>",
-                protect_content=True,
                 reply_markup=InlineKeyboardMarkup(btn)
             )
             return
