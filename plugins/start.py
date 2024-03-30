@@ -50,8 +50,7 @@ async def start_command(client: Client, message: Message):
     if not is_admin: 
         text = message.text
         is_verified = await check_verification(id)
-
-        async def short_link(link):
+        
     current_time = datetime.now() + timedelta(hours=5, minutes=30) 
     hour = current_time.hour
         
