@@ -50,12 +50,20 @@ async def start_command(client: Client, message: Message):
     if not is_admin: 
         text = message.text
         is_verified = await check_verification(id)
-        
+
+        async def howlink(link):
+            if (hour>1 and hour<6):  
+                 howto ="https://t.me/TamilSk_Demo"
+           elif (hour>6 and hour<11):  
+                 howto ="https://t.me/TamilSk_Dema"
+           else:
+                 howto ="https://t.me/TamilSk_Demk"
+       
         if not is_verified:
             btn = [[
                 InlineKeyboardButton("👨‍💻 Verify", url=await get_token(id, f"https://filestore.rapidbots.workers.dev?start="))
                 ],[
-                InlineKeyboardButton("🔻 How to open and Verify 🔺", url="https://t.me/+38qZ1467fxBiNjE1")
+                InlineKeyboardButton("🔻 How to open and Verify 🔺", url=howto)
             ]]
             await message.reply_text(
                 text="<b>Hello 👋🏻, You Need To Verify The Link To Get Movie Files, Verification Will Be Expired After 12 Hours.\n\nif You Don't Know how To Verify. Click Below Button To See Your To Verify The Link.</b>",
