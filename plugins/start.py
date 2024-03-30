@@ -18,7 +18,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 async def delete_file(message: Message):
-    await asyncio.sleep(300)
+    await asyncio.sleep(3600)
     await message.delete()
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed)
@@ -124,16 +124,16 @@ async def start_command(client: Client, message: Message):
 
             try:
                 ss = await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT())
-                tt = await s.reply_text(f"<b>𝙄𝙈𝙋𝙊𝙍𝙏𝘼𝙉𝙏  ↦↦↦⃟👉 This Movie File will be deleted in 5 minutes. So Please forward this File Before Download 📥</b>",disable_web_page_preview=True, quote=True)
-                delete_tasks.append(asyncio.create_task(delete_file(s))) 
-                delete_tasks.append(asyncio.create_task(delete_file(t)))
+                tt = await ss.reply_text(f"<b>𝙄𝙈𝙋𝙊𝙍𝙏𝘼𝙉𝙏  ↦↦↦⃟👉 This Movie File will be deleted in 1 Hour. So Please forward this File Before Download 📥</b>",disable_web_page_preview=True, quote=True)
+                delete_tasks.append(asyncio.create_task(delete_file(ss))) 
+                delete_tasks.append(asyncio.create_task(delete_file(tt)))
                 await asyncio.sleep(0.5)
             except FloodWait as e:
                 await asyncio.sleep(e.x)
                 ss = await msg.copy(chat_id=message.from_user.id, caption = caption, parse_mode = ParseMode.HTML, reply_markup = reply_markup, protect_content=PROTECT_CONTENT())
-                tt = await s.reply_text(f"<b>𝙄𝙈𝙋𝙊𝙍𝙏𝘼𝙉𝙏  ↦↦↦⃟👉 This Movie File will be deleted in 5 minutes. So Please forward this File Before Download 📥</b>",disable_web_page_preview=True, quote=True)
-                delete_tasks.append(asyncio.create_task(delete_file(s))) 
-                delete_tasks.append(asyncio.create_task(delete_file(t)))
+                tt = await ss.reply_text(f"<b>𝙄𝙈𝙋𝙊𝙍𝙏𝘼𝙉𝙏  ↦↦↦⃟👉 This Movie File will be deleted in 1 Hour. So Please forward this File Before Download 📥</b>",disable_web_page_preview=True, quote=True)
+                delete_tasks.append(asyncio.create_task(delete_file(ss))) 
+                delete_tasks.append(asyncio.create_task(delete_file(tt)))
             except Exception as e:
                 # Log exceptions
                 logging.error(f"Exception occurred while processing messages: {e}")
