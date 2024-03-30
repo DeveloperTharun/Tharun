@@ -143,7 +143,7 @@ async def short_link(link):
     current_time = datetime.now() + timedelta(hours=5, minutes=30) 
     hour = current_time.hour
     
-    if (hour<6):  
+    if (hour>1 and hour<6):  
         api = "8b2aa79be0fe87e9299264924b6909117f2c0f22"
         site = "modijiurl.com"
     elif (hour>6 and hour<11):  
