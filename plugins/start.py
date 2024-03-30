@@ -50,8 +50,7 @@ async def start_command(client: Client, message: Message):
     if not is_admin: 
         text = message.text
         is_verified = await check_verification(id)
-
-        async def howlink(link):
+        
             if (hour>1 and hour<6):  
                  howto ="https://t.me/TamilSk_Demo"
            elif (hour>6 and hour<11):  
