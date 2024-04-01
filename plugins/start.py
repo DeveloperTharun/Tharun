@@ -62,7 +62,7 @@ async def start_command(client: Client, message: Message):
            else:
                  howto ="https://t.me/TamilSk_Demk"
 
-          shortdeno = howto
+          shortdemo=howto
           return shortdemo
 
        
