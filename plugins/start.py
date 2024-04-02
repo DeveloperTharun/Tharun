@@ -49,7 +49,7 @@ async def start_command(client: Client, message: Message):
     
     if not is_admin: 
         text = message.text
-        is_verified = await check_verification(id(
+        is_verified = await check_verification(id)
             
         if not is_verified:
             btn = [[
