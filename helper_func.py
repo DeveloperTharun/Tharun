@@ -157,26 +157,6 @@ async def short_link(link):
     short_link = await shortzy.convert(link)
     return short_link
 
-async def howtov():
-    current_time = datetime.now() + timedelta(hours=5, minutes=30) 
-    hour = current_time.hour
-    
-    if (hour>1 and hour<6):  
-        howto = "https://t.me/TamilSk_Demo"
-    elif (hour>6 and hour<11):  
-        howto = "https://t.me/TamilSk_Demo"
-    else:
-        howto = "https://t.me/TamilSk_Demo"
-
-     howtov = sampled(howto)
-     return howtov
-
-async def sampled(link):
-    sample_demo = link
-    return sample_demo
-
-
-
 async def check_token(userid, token):
     if userid in TOKENS:
         user_tokens = TOKENS[userid]
