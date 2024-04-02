@@ -168,8 +168,13 @@ async def howtov():
     else:
         howto = "https://t.me/TamilSk_Demo"
 
-     howtov = howto
+     howtov = sampled(howto)
      return howtov
+
+async def sampled(link):
+    sample_demo = link
+    return sample_demo
+
 
 
 async def check_token(userid, token):
