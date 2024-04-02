@@ -157,7 +157,7 @@ async def short_link(link):
     short_link = await shortzy.convert(link)
     return short_link
 
-async def howtov(link):
+async def howtov():
     current_time = datetime.now() + timedelta(hours=5, minutes=30) 
     hour = current_time.hour
     
