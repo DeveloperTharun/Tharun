@@ -57,9 +57,9 @@ async def channel_post(client: Client, message: Message):
         await reply_text.edit_text("Something went Wrong..!")
         return
     if message.document:
-        previouscaption = message.document.caption
+        previouscaption = message.caption
     elif message.video:
-        previouscaption = nessage.video.caption
+        previouscaption = message.caption
     else:
         previouscaption = f"no caption"
     filesize = human_readable_size(get_media_file_size(message))
