@@ -56,6 +56,12 @@ async def channel_post(client: Client, message: Message):
         print(e)
         await reply_text.edit_text("Something went Wrong..!")
         return
+    if message.document:
+        previouscaption = message.document.caption
+    elif message.video:
+        previouscaption = nessage.video.caption
+    else:
+        previouscaption = f"no caption"
     filesize = human_readable_size(get_media_file_size(message))
     converted_id = post_message.id * abs(client.db_channel.id)
     string = f"get-{converted_id}"
