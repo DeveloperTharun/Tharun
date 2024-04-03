@@ -55,7 +55,7 @@ async def start_command(client: Client, message: Message):
             btn = [[
                 InlineKeyboardButton("👨‍💻 Verify", url=await get_token(id, f"https://filestore.rapidbots.workers.dev?start="))
                 ],[
-                InlineKeyboardButton("🔻 How to open and Verify 🔺", url="https://t.me/TamilSk_Demo")
+                InlineKeyboardButton("🔻 How to open and Verify 🔺", url="https://t.me/TamilSk_Demo/8")
             ]]
             await message.reply_text(
                 text="<b>Hello 👋🏻, You Need To Verify The Link To Get Movie Files, Verification Will Be Expired After 12 Hours.\n\nif You Don't Know how To Verify. Click Below Button To See Your To Verify The Link.</b>",
