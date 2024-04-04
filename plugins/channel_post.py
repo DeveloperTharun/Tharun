@@ -57,9 +57,9 @@ async def channel_post(client: Client, message: Message):
         await reply_text.edit_text("Something went Wrong..!")
         return
     if message.document:
-        previouscaption = message.caption
+        previouscaptions = message.caption
     elif message.video:
-        previouscaption = message.caption
+        previouscaptions = message.caption
     else:
         previouscaption = f"no caption"
     filesize = human_readable_size(get_media_file_size(message))
@@ -70,7 +70,7 @@ async def channel_post(client: Client, message: Message):
 
     reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔁 Share URL", url=f'https://telegram.me/share/url?url={link}')]])
 
-    await reply_text.edit(f"{previouscaption} {filesize} - <a href='{link}'>Click Here To Download</a>", reply_markup=reply_markup, disable_web_page_preview = True)
+    await reply_text.edit(f"{previouscaptions} {filesize} - <a href='{link}'>Click Here To Download</a>", reply_markup=reply_markup, disable_web_page_preview = True)
 
     if not DISABLE_CHANNEL_BUTTON:
         await post_message.edit_reply_markup(reply_markup)
