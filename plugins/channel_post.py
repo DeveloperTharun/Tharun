@@ -46,7 +46,7 @@ async def setProtect(client: Client, message: Message):
 @Bot.on_message(filters.private & filters.user(ADMINS) & filters.command("settxt"))
 async def setCommand(client: Bot, message: Message):
     try:
-        set_txt = message.text.split(maxsplit=1)[1]
+        settxt = message.text.split(maxsplit=1)[1]
     except IndexError:
         await message.reply_text("Provide a Text to update.")
         return
