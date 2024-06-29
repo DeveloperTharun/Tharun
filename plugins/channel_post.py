@@ -67,7 +67,7 @@ async def channel_post(client: Client, message: Message):
     string = f"get-{converted_id}"
     base64_string = await encode(string)
     link = f"https://filestore.rapidbots.workers.dev?start={base64_string}"
-    settxt = 🌫 <a href='{link}'>{previouscaptions}</a>
+    settxt = "🌫 <a href='{link}'>{previouscaptions}</a>"
 
     reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔁 Share URL", url=f'https://telegram.me/share/url?url={link}')]])
 
