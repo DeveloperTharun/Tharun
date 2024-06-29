@@ -43,19 +43,6 @@ async def setProtect(client: Client, message: Message):
     os.environ["PROTECT_CONTENT"] = str(not protectOn)
     await message.reply_text(f"Protect changed to `{not protectOn}`")
 
-@Bot.on_message(filters.private & filters.user(ADMINS) & filters.command("settxt"))
-async def setCommand(client: Bot, message: Message):
-    try:
-        settxt = message.text.split(maxsplit=1)[1]
-    except IndexError:
-        await message.reply_text("Provide a Text to update.")
-        return
-    except Exception as er:
-        await message.reply_text(f"{er}")
-        return
-    os.environ["SET_TXT"] = settxt
-    await message.reply_text(f"Force Sub Updated to {settxt}")
-
 
 @Bot.on_message(filters.private & filters.user(ADMINS) & ~filters.command(['start','users','broadcast','batch','genlink','stats', 'setforcesub', 'toggleprotect']))
 async def channel_post(client: Client, message: Message):
@@ -80,6 +67,7 @@ async def channel_post(client: Client, message: Message):
     string = f"get-{converted_id}"
     base64_string = await encode(string)
     link = f"https://filestore.rapidbots.workers.dev?start={base64_string}"
+    settxt = 🌫 <a href='{link}'>{previouscaptions}</a>
 
     reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔁 Share URL", url=f'https://telegram.me/share/url?url={link}')]])
 
